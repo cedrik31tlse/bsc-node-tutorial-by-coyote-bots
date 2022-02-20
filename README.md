@@ -110,3 +110,10 @@ chown -R geth.geth /home/geth/*
 systemctl enable geth
 systemctl start geth
 ```
+
+15. Configure Chainsniper config.json file to use the node (if Chainsniper is installed on same server) :
+
+```
+Http node  : http://127.0.0.1:8545
+WS node : ws://127.0.0.1:8546
+```
