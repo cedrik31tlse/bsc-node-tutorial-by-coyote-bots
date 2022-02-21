@@ -9,6 +9,27 @@ Link to official server of Coyote bots : https://discord.gg/fP3Z4tY92j
 
 This tutorial helps to create a node on BSC network from a fresh install of Ubuntu 20.04.
 
+0. HETZNER put disk in RAID 0 
+
+```
+- Run your server in Linux Rescue mode
+  - Go in your server panel on hetzner website
+  - Go in Rescue tab. Activate it and save the new password
+  - Go in Reset tab and do a Automatic reset
+  - Run in SSH with the new root password
+  
+  Type :
+  installimage
+  
+  Then change SWRAIDLEVEL to 0
+  
+  Then press F2 to save
+  Then press F10 2 times to exit.
+  
+  At the end of the reformat, enter "reboot". 
+  The server will reboot and you can start at step 1.
+```
+
 1. Update all packages
 
 ```
