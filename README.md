@@ -87,7 +87,7 @@ aria2c -o geth.tar.lz4 -x 4 -s 12 "https://tf-dex-prod-public-snapshot-site1.s3-
 9. Extract snapshot
 
 ```
-nohup tar -I lz4 -xvf geth.tar.lz4 &
+tar -I lz4 -xvf geth.tar.lz4
 ```
 
 10. Move to datadir folder
