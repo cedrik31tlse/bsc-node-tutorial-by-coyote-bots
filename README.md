@@ -93,7 +93,6 @@ tar -I lz4 -xvf geth.tar.lz4
 10. Move to datadir folder
 
 ```
-mkdir mainnet
 mv server/data-seed/* mainnet/
 ```
 
