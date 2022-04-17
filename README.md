@@ -21,6 +21,9 @@ This tutorial helps to create a node on BSC network from a fresh install of Ubun
   Type :
   installimage
   
+  Choose Ubuntu 2004 minimal
+  then you will be in setup file
+
   Then change SWRAIDLEVEL to 0
   
   Then press F2 to save
