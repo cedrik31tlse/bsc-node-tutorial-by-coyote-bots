@@ -44,7 +44,7 @@ apt update && apt upgrade -y
 ```
 useradd -m geth
 cd /home/geth
-wget https://github.com/binance-chain/bsc/releases/download/v1.1.7/geth_linux
+wget https://github.com/binance-chain/bsc/releases/download/v1.1.11/geth_linux
 chmod +x geth_linux
 ```
 
@@ -57,7 +57,7 @@ nano start.sh
 4. Paste content in the empty file
 
 ```
-./geth_linux --config ./config.toml --datadir ./mainnet --diffsync --cache 48000 --rpc.allow-unprotected-txs --txlookuplimit 0 --ws --ws.addr 0.0.0.0 --ws.origins '*' --ws.api eth,net,web3,txpool,debug
+./geth_linux --config ./config.toml --datadir ./mainnet --pipecommit --cache 32000 --rpc.allow-unprotected-txs --txlookuplimit 0 --ws --ws.addr 0.0.0.0 --ws.origins '*' --ws.api eth,net,web3,txpool,debug
 ```
 
 5. Make start.sh file executable
@@ -75,28 +75,36 @@ apt install unzip aria2 -y
 7. Download all data
 
 ```
-wget https://github.com/binance-chain/bsc/releases/download/v1.1.7/mainnet.zip
+wget https://github.com/binance-chain/bsc/releases/download/v1.1.11/mainnet.zip
 unzip mainnet.zip
-mv mainnet/genesis.json genesis.json
-mv mainnet/config.toml config.toml
 ```
 
 8. Change URLs by the last pruned snapshots available you can find here : https://github.com/bnb-chain/bsc-snapshots
 
 ```
-aria2c -o geth.tar.lz4 -x 4 -s 12 "https://tf-dex-prod-public-snapshot-site1.s3-accelerate.amazonaws.com/geth-20220214.tar.lz4?AWSAccessKeyId=AKIAYINE6SBQPUZDDRRO&Signature=2tfJQYSr7v4rXur%2BMyg77pV%2F1pg%3D&Expires=1647467962" "https://tf-dex-prod-public-snapshot.s3-accelerate.amazonaws.com/geth-20220214.tar.lz4?AWSAccessKeyId=AKIAYINE6SBQPUZDDRRO&Signature=e04Fa%2BEfGooSyvs%2FsBcqNW7hdPo%3D&Expires=1647467962" "https://tf-dex-prod-public-snapshot-site3.s3-accelerate.amazonaws.com/geth-20220214.tar.lz4?AWSAccessKeyId=AKIAYINE6SBQPUZDDRRO&Signature=ef1JljCd7t6jNh9lEV7%2FoowtUT4%3D&Expires=1647467963"
+nohup aria2c -o geth.tar.lz4 -c -x 4 -s 12 "https://tf-dex-prod-public-snapshot-site1.s3-accelerate.amazonaws.com/geth-20220613-prune-ancient.tar.lz4?AWSAccessKeyId=AKIAYINE6SBQPUZDDRRO&Signature=oGZ4fwSwyQNnCyknRWlSl4ZldRU%3D&Expires=1657796923" &
+
+You can check the status of the download by doing :
+Ctrl-C
+then : 
+tail -f nohup.out
 ```
 
 9. Extract snapshot
 
 ```
-tar -I lz4 -xvf geth.tar.lz4
+nohup tar -I lz4 -xvf geth.tar.lz4 &
+
+You can check the status of the extraction by doing :
+Ctrl-C
+then : 
+tail -f nohup.out
 ```
 
 10. Move to datadir folder
 
 ```
-mv server/data-seed/* mainnet/
+mv server1/data-seed/* mainnet/
 ```
 
 11. Create service to start the node
@@ -139,4 +147,10 @@ systemctl start geth
 ```
 Http node  : http://127.0.0.1:8545
 WS node : ws://127.0.0.1:8546
+```
+
+16. Check sync logs:
+
+```
+tail -f /home/geth/mainnet/bsc.log
 ```
