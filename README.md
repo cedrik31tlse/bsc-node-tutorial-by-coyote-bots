@@ -44,7 +44,7 @@ apt update && apt upgrade -y
 ```
 useradd -m geth
 cd /home/geth
-wget https://github.com/binance-chain/bsc/releases/download/v1.1.11/geth_linux
+wget https://github.com/binance-chain/bsc/releases/download/v1.1.13/geth_linux
 chmod +x geth_linux
 ```
 
@@ -75,11 +75,11 @@ apt install unzip aria2 -y
 7. Download all data
 
 ```
-wget https://github.com/binance-chain/bsc/releases/download/v1.1.11/mainnet.zip
+wget https://github.com/binance-chain/bsc/releases/download/v1.1.13/mainnet.zip
 unzip mainnet.zip
 ```
 
-8. Change URLs by the last pruned snapshots available you can find here : https://github.com/bnb-chain/bsc-snapshots
+8. Change URL by the last pruned snapshots available you can find here : https://github.com/bnb-chain/bsc-snapshots
 
 ```
 nohup aria2c -o geth.tar.lz4 -c -x 4 -s 12 "https://tf-dex-prod-public-snapshot-site1.s3-accelerate.amazonaws.com/geth-20220613-prune-ancient.tar.lz4?AWSAccessKeyId=AKIAYINE6SBQPUZDDRRO&Signature=oGZ4fwSwyQNnCyknRWlSl4ZldRU%3D&Expires=1657796923" &
@@ -88,6 +88,8 @@ You can check the status of the download by doing :
 Ctrl-C
 then : 
 tail -f nohup.out
+
+then Ctrl-C to exit the log file
 ```
 
 9. Extract snapshot
