@@ -106,7 +106,10 @@ tail -f nohup.out
 10. Move to datadir folder
 
 ```
-mv server1/data-seed/* mainnet/
+mkdir mainnet
+mv geth mainnet
+
+(actually move the extracted data in the /home/geth/{extracted folder name -geth- } to the folder /home/geth/mainnet/geth)
 ```
 
 11. Create service to start the node
