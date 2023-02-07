@@ -79,7 +79,7 @@ wget https://github.com/bnb-chain/bsc/releases/download/v1.1.18_hf/mainnet.zip
 unzip mainnet.zip
 ```
 
-8. Change URL by the last pruned snapshots available you can find here : https://github.com/bnb-chain/bsc-snapshots
+8. Change URL by the last pruned snapshots available you can find here : https://github.com/48Club/bsc-snapshots#geth-snapshots
 
 ```
 nohup aria2c -s14 -x14 -k100M https://snapshots.48.club/{geth.use_the_last_snapshot.tar.lz4} -o geth.tar.lz4 &
