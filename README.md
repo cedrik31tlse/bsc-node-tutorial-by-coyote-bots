@@ -44,7 +44,7 @@ apt update && apt upgrade -y
 ```
 useradd -m geth
 cd /home/geth
-wget https://github.com/binance-chain/bsc/releases/download/v1.1.13/geth_linux
+wget https://github.com/bnb-chain/bsc/releases/download/v1.1.18_hf/geth_linux
 chmod +x geth_linux
 ```
 
@@ -57,7 +57,7 @@ nano start.sh
 4. Paste content in the empty file
 
 ```
-./geth_linux --config ./config.toml --datadir ./mainnet --pipecommit --cache 32000 --rpc.allow-unprotected-txs --txlookuplimit 0 --ws --ws.addr 0.0.0.0 --ws.origins '*' --ws.api eth,net,web3,txpool,debug
+./geth_linux --config ./config.toml --datadir ./mainnet  --diffsync --pipecommit --cache 48000 --maxpeers 400 --txlookuplimit 0 --http --http.addr 0.0.0.0 --http.corsdomain '*' --http.api eth,net,web3,txpool,debug --ws --ws.addr 0.0.0.0 --ws.origins '*' --ws.api eth,net,web3,txpool,debug --syncmode=full --tries-verify-mode=none --pruneancient=true --diffblock=5000
 ```
 
 5. Make start.sh file executable
@@ -75,14 +75,14 @@ apt install unzip aria2 -y
 7. Download all data
 
 ```
-wget https://github.com/binance-chain/bsc/releases/download/v1.1.13/mainnet.zip
+wget https://github.com/bnb-chain/bsc/releases/download/v1.1.18_hf/mainnet.zip
 unzip mainnet.zip
 ```
 
 8. Change URL by the last pruned snapshots available you can find here : https://github.com/bnb-chain/bsc-snapshots
 
 ```
-nohup aria2c -o geth.tar.lz4 -c -x 4 -s 12 "https://tf-dex-prod-public-snapshot-site1.s3-accelerate.amazonaws.com/geth-20220613-prune-ancient.tar.lz4?AWSAccessKeyId=AKIAYINE6SBQPUZDDRRO&Signature=oGZ4fwSwyQNnCyknRWlSl4ZldRU%3D&Expires=1657796923" &
+nohup aria2c -s14 -x14 -k100M https://snapshots.48.club/{geth.use_the_last_snapshot.tar.lz4} -o geth.tar.lz4 &
 
 You can check the status of the download by doing :
 Ctrl-C
@@ -95,12 +95,7 @@ then Ctrl-C to exit the log file
 9. Extract snapshot
 
 ```
-nohup tar -I lz4 -xvf geth.tar.lz4 &
-
-You can check the status of the extraction by doing :
-Ctrl-C
-then : 
-tail -f nohup.out
+lz4 -cd geth.tar.lz4 | tar xf -
 ```
 
 10. Move to datadir folder
@@ -151,6 +146,10 @@ systemctl start geth
 
 ```
 Http node  : http://127.0.0.1:8545
+IPC node : /home/geth/mainnet/geth.ipc
+(better with IPC)
+
+
 WS node : ws://127.0.0.1:8546
 ```
 
