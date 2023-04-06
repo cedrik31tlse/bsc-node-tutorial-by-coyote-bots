@@ -44,7 +44,7 @@ apt update && apt upgrade -y
 ```
 useradd -m geth
 cd /home/geth
-wget https://github.com/bnb-chain/bsc/releases/download/v1.1.18_hf/geth_linux
+wget https://github.com/bnb-chain/bsc/releases/download/v1.1.21/geth_linux
 chmod +x geth_linux
 ```
 
@@ -57,7 +57,7 @@ nano start.sh
 4. Paste content in the empty file
 
 ```
-./geth_linux --config ./config.toml --datadir ./mainnet  --diffsync --pipecommit --cache 48000 --maxpeers 400 --txlookuplimit 0 --http --http.addr 0.0.0.0 --http.corsdomain '*' --http.api eth,net,web3,txpool,debug --ws --ws.addr 0.0.0.0 --ws.origins '*' --ws.api eth,net,web3,txpool,debug --syncmode=full --tries-verify-mode=none --pruneancient=true --diffblock=5000
+./geth_linux --config ./config.toml --datadir ./mainnet --pipecommit --cache 48000 --maxpeers 400 --txlookuplimit 0 --http --http.addr 0.0.0.0 --http.corsdomain '*' --http.api eth,net,web3,txpool,debug --ws --ws.addr 0.0.0.0 --ws.origins '*' --ws.api eth,net,web3,txpool,debug --syncmode=full --tries-verify-mode=none --pruneancient=true --diffblock=5000
 ```
 
 5. Make start.sh file executable
@@ -75,7 +75,7 @@ apt install unzip aria2 -y
 7. Download all data
 
 ```
-wget https://github.com/bnb-chain/bsc/releases/download/v1.1.18_hf/mainnet.zip
+wget https://github.com/bnb-chain/bsc/releases/download/v1.1.21/mainnet.zip
 unzip mainnet.zip
 ```
 
